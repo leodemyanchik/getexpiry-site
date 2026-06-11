@@ -1,26 +1,64 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email подтверждён — Expiry</title>
+    <title>Email Confirmed — Expiry</title>
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
   <body>
     <div class="card">
       <div class="logo">expiry</div>
       <div class="success-icon">✓</div>
-      <h1>Email подтверждён!</h1>
-      <p class="subtitle">
-        Ваш аккаунт активирован. Вернитесь в приложение Expiry для входа.
+      <h1 id="title">Email Confirmed!</h1>
+      <p class="subtitle" id="subtitle">
+        Your account is activated. Return to the Expiry app to sign in.
       </p>
-      <a href="io.supabase.expiry://auth/callback" class="btn-primary"
-        >Открыть приложение</a
+      <a href="io.supabase.expiry://auth/callback" class="btn-primary" id="btn"
+        >Open App</a
       >
-      <p class="hint">
-        Если приложение не открылось автоматически, откройте Expiry вручную и
-        войдите в свой аккаунт.
+      <p class="hint" id="hint">
+        If the app didn't open automatically, open Expiry manually and sign in
+        to your account.
       </p>
     </div>
+    <script>
+      const i18n = {
+        en: {
+          title: "Email Confirmed!",
+          subtitle:
+            "Your account is activated. Return to the Expiry app to sign in.",
+          btn: "Open App",
+          hint: "If the app didn't open automatically, open Expiry manually and sign in to your account.",
+          pageTitle: "Email Confirmed — Expiry",
+        },
+        ru: {
+          title: "Email подтверждён!",
+          subtitle:
+            "Ваш аккаунт активирован. Вернитесь в приложение Expiry для входа.",
+          btn: "Открыть приложение",
+          hint: "Если приложение не открылось автоматически, откройте Expiry вручную и войдите в свой аккаунт.",
+          pageTitle: "Email подтверждён — Expiry",
+        },
+        pl: {
+          title: "Email potwierdzony!",
+          subtitle:
+            "Twoje konto zostało aktywowane. Wróć do aplikacji Expiry, aby się zalogować.",
+          btn: "Otwórz aplikację",
+          hint: "Jeśli aplikacja nie otworzyła się automatycznie, otwórz Expiry ręcznie i zaloguj się na swoje konto.",
+          pageTitle: "Email potwierdzony — Expiry",
+        },
+      };
+
+      const lang = (navigator.language || "").slice(0, 2);
+      const t = i18n[lang] || i18n.en;
+
+      document.documentElement.lang = lang in i18n ? lang : "en";
+      document.title = t.pageTitle;
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("subtitle").textContent = t.subtitle;
+      document.getElementById("btn").textContent = t.btn;
+      document.getElementById("hint").textContent = t.hint;
+    </script>
   </body>
 </html>
