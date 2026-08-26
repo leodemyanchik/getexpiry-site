@@ -11,9 +11,9 @@
     <div class="card">
       <div class="logo">expiry</div>
       <div class="success-icon">✓</div>
-      <h1 id="title">Email Confirmed!</h1>
+      <h1 id="title">Continue in Expiry</h1>
       <p class="subtitle" id="subtitle">
-        Your account is activated. Return to the Expiry app to sign in.
+        Open the Expiry app to finish securely.
       </p>
       <a href="io.supabase.expiry://auth/callback" class="btn-primary" id="btn"
         >Open App</a
@@ -26,40 +26,100 @@
     <script>
       const i18n = {
         en: {
-          title: "Email Confirmed!",
-          subtitle:
-            "Your account is activated. Return to the Expiry app to sign in.",
-          btn: "Open App",
-          hint: "If the app didn't open automatically, open Expiry manually and sign in to your account.",
-          pageTitle: "Email Confirmed — Expiry",
+          confirmation: {
+            title: "Email Confirmed!",
+            subtitle:
+              "Your account is activated. Return to the Expiry app to sign in.",
+            pageTitle: "Email Confirmed — Expiry",
+          },
+          recovery: {
+            title: "Reset your password",
+            subtitle: "Open Expiry to choose a new password for your account.",
+            pageTitle: "Reset Password — Expiry",
+          },
+          fallback: {
+            title: "Continue in Expiry",
+            subtitle: "Open the Expiry app to finish securely.",
+            pageTitle: "Continue in Expiry",
+          },
+          btn: "Open Expiry",
+          hint: "If the app didn't open automatically, tap the button above.",
         },
         ru: {
-          title: "Email подтверждён!",
-          subtitle:
-            "Ваш аккаунт активирован. Вернитесь в приложение Expiry для входа.",
-          btn: "Открыть приложение",
-          hint: "Если приложение не открылось автоматически, откройте Expiry вручную и войдите в свой аккаунт.",
-          pageTitle: "Email подтверждён — Expiry",
+          confirmation: {
+            title: "Email подтверждён!",
+            subtitle:
+              "Ваш аккаунт активирован. Вернитесь в приложение Expiry для входа.",
+            pageTitle: "Email подтверждён — Expiry",
+          },
+          recovery: {
+            title: "Сброс пароля",
+            subtitle: "Откройте Expiry, чтобы установить новый пароль.",
+            pageTitle: "Сброс пароля — Expiry",
+          },
+          fallback: {
+            title: "Продолжите в Expiry",
+            subtitle: "Откройте приложение Expiry, чтобы безопасно завершить действие.",
+            pageTitle: "Продолжить в Expiry",
+          },
+          btn: "Открыть Expiry",
+          hint: "Если приложение не открылось автоматически, нажмите кнопку выше.",
         },
         pl: {
-          title: "Email potwierdzony!",
-          subtitle:
-            "Twoje konto zostało aktywowane. Wróć do aplikacji Expiry, aby się zalogować.",
-          btn: "Otwórz aplikację",
-          hint: "Jeśli aplikacja nie otworzyła się automatycznie, otwórz Expiry ręcznie i zaloguj się na swoje konto.",
-          pageTitle: "Email potwierdzony — Expiry",
+          confirmation: {
+            title: "Email potwierdzony!",
+            subtitle:
+              "Twoje konto zostało aktywowane. Wróć do aplikacji Expiry, aby się zalogować.",
+            pageTitle: "Email potwierdzony — Expiry",
+          },
+          recovery: {
+            title: "Resetowanie hasła",
+            subtitle: "Otwórz Expiry, aby ustawić nowe hasło do konta.",
+            pageTitle: "Resetowanie hasła — Expiry",
+          },
+          fallback: {
+            title: "Kontynuuj w Expiry",
+            subtitle: "Otwórz aplikację Expiry, aby bezpiecznie dokończyć operację.",
+            pageTitle: "Kontynuuj w Expiry",
+          },
+          btn: "Otwórz Expiry",
+          hint: "Jeśli aplikacja nie otworzyła się automatycznie, dotknij przycisku powyżej.",
         },
       };
 
       const lang = (navigator.language || "").slice(0, 2);
       const t = i18n[lang] || i18n.en;
+      const query = new URLSearchParams(window.location.search);
+      const fragment = new URLSearchParams(window.location.hash.slice(1));
+      const authType = fragment.get("type") || query.get("type");
+      const mode =
+        authType === "recovery"
+          ? "recovery"
+          : authType === "signup" || authType === "email"
+            ? "confirmation"
+            : "fallback";
+      const copy = t[mode];
+      const hasAuthPayload =
+        query.has("code") ||
+        fragment.has("access_token") ||
+        fragment.has("error_code") ||
+        query.has("error_code");
+      const callbackUrl =
+        "io.supabase.expiry://auth/callback" +
+        window.location.search +
+        window.location.hash;
 
       document.documentElement.lang = lang in i18n ? lang : "en";
-      document.title = t.pageTitle;
-      document.getElementById("title").textContent = t.title;
-      document.getElementById("subtitle").textContent = t.subtitle;
+      document.title = copy.pageTitle;
+      document.getElementById("title").textContent = copy.title;
+      document.getElementById("subtitle").textContent = copy.subtitle;
       document.getElementById("btn").textContent = t.btn;
+      document.getElementById("btn").href = callbackUrl;
       document.getElementById("hint").textContent = t.hint;
+
+      if (hasAuthPayload && !fragment.has("error_code") && !query.has("error_code")) {
+        window.setTimeout(() => window.location.assign(callbackUrl), 600);
+      }
     </script>
   </body>
 </html>
