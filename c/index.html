@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="apple-itunes-app" content="app-id=6780260457">
+  <meta property="og:title" content="A coupon for you · Expiry">
+  <meta property="og:description" content="Open a shared coupon. Save it in Expiry and remember it before it expires.">
+  <title>A coupon for you · Expiry</title>
+  <link rel="stylesheet" href="/c/share.css">
+  <script type="module" src="/c/share.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="/" aria-label="Expiry home">expiry<span>.</span></a>
+    <label><span class="sr-only">Language</span><select id="language"><option value="en">English</option><option value="pl">Polski</option><option value="ru">Русский</option></select></label></header>
+  <main>
+    <p class="eyebrow" data-copy="eyebrow">A little saving, shared.</p>
+    <h1 data-copy="title">A coupon for you.</h1>
+    <p id="status" role="status">Loading coupon…</p>
+    <button id="retry" hidden data-copy="retry">Try again</button>
+    <article id="coupon" hidden aria-labelledby="store">
+      <div class="ticket-top"><h2 id="store"></h2><p id="discount"></p><p id="expiry"></p><p id="minimum"></p></div>
+      <div class="ticket-code"><div id="code"></div><p id="raw-code"></p><p id="promo"></p></div>
+      <button id="checkout" data-copy="checkout">Show at checkout</button>
+      <p class="small" data-copy="warning">Single-use coupons can only be redeemed once. Check the store’s terms; some coupons require the original.</p>
+    </article>
+    <section class="download">
+      <h2 data-copy="keep">Keep it. Don’t forget it.</h2>
+      <p data-copy="benefit">Save your coupons in Expiry and get an expiry reminder.</p>
+      <a id="open-app" class="button secondary" hidden data-copy="open">Open in Expiry</a>
+      <a class="button" href="https://apps.apple.com/app/id6780260457" rel="noreferrer" data-copy="download">Get Expiry for iPhone ↗</a>
+      <p class="small" data-copy="after">Just installed? Return to this message and open the link again.</p>
+    </section>
+    <p class="small" data-copy="privacy">Anyone with this link can view this copy. The sender can disable the link. Saved copies cannot be recalled.</p>
+  </main>
+  <dialog id="fullscreen"><button id="close" data-copy="close">Close</button><div id="large-code"></div></dialog>
+  <footer><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></footer>
+</body>
+</html>

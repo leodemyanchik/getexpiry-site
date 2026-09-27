@@ -1,6 +1,6 @@
 # Expiry website
 
-Static landing page for the released iPhone app. No build step or JavaScript dependency.
+Static landing page for the released iPhone app. No build step. The coupon-sharing page uses vendored browser JavaScript.
 
 ## Local preview
 
@@ -18,3 +18,9 @@ Light editorial direction: warm off-white, dark ink, Expiry purple, Outfit headi
 - The page is English; it describes the app's EN/PL/RU support, not website localization.
 
 Checked local routes (home/privacy/terms/auth/styles), FAQ interaction, CTA destinations, and horizontal overflow at 320, 375, 768, 1024 and 1440px.
+
+## Coupon sharing
+
+`c/` contains the EN/PL/RU public coupon page. It fetches only the public snapshot endpoint, not the private coupons table. QR/barcode rendering uses locally vendored bwip-js 4.11.4; its license is in `c/vendor`. Fonts and their licenses are in `c/fonts`. No analytics or external font requests are added to this page.
+
+Publish `.well-known/apple-app-site-association` and `.nojekyll` as well. Confirm the AASA URL returns JSON over HTTPS without redirects before enabling Universal Links. Backend and app activation prerequisites are recorded in the app repository's `docs/coupon-sharing.md`. Publishing this folder alone does not activate the feature in existing App Store builds.
