@@ -9,6 +9,10 @@ let language = navigator.language.slice(0,2) in words ? navigator.language.slice
 let coupon, state = 'loading';
 const token = new URL(location.href).searchParams.get('t');
 const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(token ?? '');
+const currencyLabel = value => ({
+  PLN:'zł', EUR:'€', USD:'$', GBP:'£', RUB:'₽', UAH:'₴', CZK:'Kč',
+  JPY:'¥', CNY:'CN¥', KRW:'₩',
+})[String(value).trim().toUpperCase()] ?? String(value).trim().toUpperCase();
 function render() {
   const w = words[language]; document.documentElement.lang = language;
   document.querySelectorAll('[data-copy]').forEach(el => { el.textContent = w[el.dataset.copy]; });
@@ -19,12 +23,13 @@ function render() {
   $('open-app').hidden = state !== 'ready';
   if (!coupon) return;
   $('store').textContent = coupon.store_name;
-  $('discount').textContent = `${coupon.discount_value}${coupon.discount_type === 'percent' ? '%' : ' '+coupon.currency}`;
+  const currency = currencyLabel(coupon.currency);
+  $('discount').textContent = `${coupon.discount_value}${coupon.discount_type === 'percent' ? '%' : ' '+currency}`;
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
   const expired = coupon.expiry_date < today;
   $('expiry').textContent = `${w.until} ${coupon.expiry_date}${expired ? ' · '+w.expired : ''}`;
-  $('minimum').textContent = coupon.min_spend == null ? '' : `${w.minimum}: ${coupon.min_spend} ${coupon.currency}`;
+  $('minimum').textContent = coupon.min_spend == null ? '' : `${w.minimum}: ${coupon.min_spend} ${currency}`;
   $('raw-code').textContent = coupon.code_value ?? '';
   $('promo').textContent = coupon.promo_code ?? '';
   $('code').replaceChildren();
