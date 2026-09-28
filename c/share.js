@@ -24,11 +24,15 @@ function render() {
   if (!coupon) return;
   $('store').textContent = coupon.store_name;
   const currency = currencyLabel(coupon.currency);
-  $('discount').textContent = `${coupon.discount_value}${coupon.discount_type === 'percent' ? '%' : ' '+currency}`;
+  const hasValue = coupon.has_value !== false;
+  $('discount').hidden = !hasValue;
+  $('discount').textContent = hasValue ? `${coupon.discount_value}${coupon.discount_type === 'percent' ? '%' : ' '+currency}` : '';
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-  const expired = coupon.expiry_date < today;
-  $('expiry').textContent = `${w.until} ${coupon.expiry_date}${expired ? ' · '+w.expired : ''}`;
+  const hasExpiry = coupon.has_expiry !== false;
+  const expired = hasExpiry && coupon.expiry_date < today;
+  $('expiry').hidden = !hasExpiry;
+  $('expiry').textContent = hasExpiry ? `${w.until} ${coupon.expiry_date}${expired ? ' · '+w.expired : ''}` : '';
   $('minimum').textContent = coupon.min_spend == null ? '' : `${w.minimum}: ${coupon.min_spend} ${currency}`;
   $('raw-code').textContent = coupon.code_value ?? '';
   $('promo').textContent = coupon.promo_code ?? '';
