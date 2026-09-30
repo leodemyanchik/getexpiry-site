@@ -31,8 +31,14 @@ function render() {
   const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
   const hasExpiry = coupon.has_expiry !== false;
   const expired = hasExpiry && coupon.expiry_date < today;
-  $('expiry').hidden = !hasExpiry;
-  $('expiry').textContent = hasExpiry ? `${w.until} ${coupon.expiry_date}${expired ? ' · '+w.expired : ''}` : '';
+  const used = !!coupon.used_at;
+  if (used) $('status').textContent = {en:'Marked as used by a recipient or owner.',pl:'Oznaczony jako wykorzystany przez odbiorcę lub właściciela.',ru:'Получатель или владелец отметил купон использованным.'}[language];
+  const fromLabel = {en:'Valid from',pl:'Ważny od',ru:'Действует с'}[language];
+  $('expiry').hidden = !hasExpiry && !coupon.valid_from;
+  $('expiry').textContent = [
+    coupon.valid_from ? `${fromLabel} ${coupon.valid_from}` : '',
+    hasExpiry ? `${w.until} ${coupon.expiry_date}${expired ? ' · '+w.expired : ''}` : '',
+  ].filter(Boolean).join(' · ');
   $('minimum').textContent = coupon.min_spend == null ? '' : `${w.minimum}: ${coupon.min_spend} ${currency}`;
   $('raw-code').textContent = coupon.code_value ?? '';
   $('promo').textContent = coupon.promo_code ?? '';
@@ -45,7 +51,7 @@ function render() {
       $('code').append(document.importNode(doc.documentElement, true));
     } catch { /* Keep the exact readable code if this symbology cannot encode it. */ }
   }
-  $('checkout').hidden = expired || !coupon.code_value;
+  $('checkout').hidden = expired || used || !coupon.code_value;
   $('open-app').href = `expiry://coupon?t=${token}`;
 }
 async function load() {
