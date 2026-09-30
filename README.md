@@ -19,6 +19,14 @@ Light editorial direction: warm off-white, dark ink, Expiry purple, Outfit headi
 
 Checked local routes (home/privacy/terms/auth/styles), FAQ interaction, CTA destinations, and horizontal overflow at 320, 375, 768, 1024 and 1440px.
 
+## Pending landing and search update (2026-09-30)
+
+Local changes add six item types, coupon-link sharing, related FAQ, robots.txt
+and a public sitemap. See `docs/search-visibility.md` for release-verification
+and Search Console prerequisites; these changes are not yet published.
+Run `tests/landing.test.cjs` with Node and Playwright installed, against the local
+server on port 8766 (override `SITE_URL` if needed).
+
 ## Coupon sharing
 
 `c/` contains the EN/PL/RU public coupon page. It fetches only the public snapshot endpoint, not the private coupons table. QR/barcode rendering uses locally vendored bwip-js 4.11.4; its license is in `c/vendor`. Fonts and their licenses are in `c/fonts`. No analytics or external font requests are added to this page.
