@@ -17,7 +17,7 @@ retained as historical evidence.
 - Domain property Sitemap report contains `https://getexpiry.me/sitemap.xml`,
   status Successful, three discovered pages, last processed 2026-10-03.
 
-### New first-stage pages — local, not deployed
+### New first-stage pages — published 2026-10-03
 
 The user approved starting with a Polish homepage and an English screenshot
 guide. Implemented `/pl/` and `/save-coupons-from-screenshots/`, plus discoverable
@@ -36,14 +36,18 @@ for all three product pages at 320/375/768/812/1024/1440 widths with no horizont
 overflow and loaded images. FAQ expansion, guide anchors and language/site links
 are verified separately. No automatic ranking improvement is promised.
 
-After an authorized push/deployment, verify the two public routes, five-entry
-sitemap, reciprocal alternates and indexed canonicals in Search Console. Its
-existing sitemap URL is unchanged; no new property or DNS change is necessary.
-Request indexing only after the new pages are live. Evaluate impressions,
+The user authorized publication. Commit `74e3786` was pushed to `main` and
+GitHub Pages run `37147253439` completed successfully. Live checks confirmed
+HTTP 200 and matching content for all three product pages, both stylesheets,
+the actual screenshot, robots.txt and the five-entry sitemap. Chrome confirmed
+the Polish homepage's canonical/alternates and navigation to the English guide.
+
+The new pages' indexed status and Google's selected canonicals have not yet
+been checked in Search Console. Its existing sitemap URL is unchanged; no new
+property or DNS change is necessary. Evaluate impressions,
 queries and clicks by page over the following weeks before adding more topics.
 
-No publish, commit, push, Search Console write, new analytics or hosting change
-has been performed by this local implementation.
+No Search Console write, new analytics, DNS or hosting change was performed.
 
 ## Verified live
 

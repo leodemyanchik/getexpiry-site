@@ -16,7 +16,7 @@ Light editorial direction: warm off-white, dark ink, Expiry purple, Outfit headi
 - Legal pages and auth handoff use `assets/pages.css`, sharing the landing's palette and typography. Legal text and auth callback script remain unchanged.
 - No analytics scripts, cookies or new tracking added. External Google Fonts was already used by the website.
 - The published homepage was originally English; a Polish homepage is now
-  prepared locally at `/pl/` (see the first SEO expansion below). App language
+  available at `/pl/` (see the first SEO expansion below). App language
   support does not imply that all website routes are translated.
 
 Checked local routes (home/privacy/terms/auth/styles), FAQ interaction, CTA destinations, and horizontal overflow at 320, 375, 768, 1024 and 1440px.
@@ -31,7 +31,7 @@ See `docs/search-visibility.md` for dated evidence and new-page status.
 Run `tests/landing.test.cjs` with Node and Playwright installed, against the local
 server on port 8766 (override `SITE_URL` if needed).
 
-## First SEO expansion (2026-10-03, local until published)
+## First SEO expansion (published 2026-10-03)
 
 - `/pl/`: complete Polish product landing, using the same visual language.
 - `/save-coupons-from-screenshots/`: original English iPhone import guide with
@@ -48,8 +48,10 @@ server on port 8766 (override `SITE_URL` if needed).
 
 Run `node tests/seo.test.cjs` for dependency-free static checks. Browser QA uses
 the local server and routes above at 320, 375, 768, 812 (landscape), 1024, 1440px.
-New pages are **not live** until this checkout is committed/pushed and the
-GitHub Pages deployment succeeds; then recheck public URLs and Search Console.
+Published from commit `74e3786`; GitHub Pages run `37147253439` succeeded.
+Public HTML, CSS, screenshot, robots and the five-entry sitemap return HTTP 200
+and match this checkout. Chrome confirms the Polish homepage and English guide
+load correctly. This confirms publication, not Google's indexing of new pages.
 
 ## Coupon sharing
 
