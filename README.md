@@ -53,6 +53,31 @@ Public HTML, CSS, screenshot, robots and the five-entry sitemap return HTTP 200
 and match this checkout. Chrome confirms the Polish homepage and English guide
 load correctly. This confirms publication, not Google's indexing of new pages.
 
+## Polish language suggestion (2026-10-03)
+
+The English homepage offers a non-modal Polish suggestion when PL is the
+browser's first supported language and the visitor has not selected EN/PL.
+The Polish CTA navigates to `/pl/`; **Stay in English** dismisses it and restores
+keyboard focus to the header's EN link. Header language links and the guide's
+Polish-homepage links save explicit choices in the device-only
+`expiry.site-language.v1` localStorage key. No choice is inferred from visiting a
+URL. No IP lookup, cookies, analytics or automatic redirects are introduced.
+
+Remembering a choice prevents repeated suggestions, not forced language
+navigation: explicit URLs always remain accessible. If storage is blocked,
+links/dismissal work normally but the choice can only persist for that visit.
+The prompt is hidden without JavaScript; static EN/PL links, canonical URLs,
+reciprocal hreflang and sitemap entries are unchanged. Coupon/auth/legal routes
+do not load the preference script; the English-only guide has no prompt.
+
+Run `node tests/site-language.test.cjs` and `node tests/seo.test.cjs`.
+For controlled Chrome UI tests, run `node tests/preview-language.cjs` and open
+`http://127.0.0.1:8772/?qa-language=pl&qa-choice=reset`. This loopback-only server
+injects test language/storage settings; production URLs accept no QA overrides.
+Checked five widths, keyboard dismissal, EN/PL navigation, reload persistence,
+mixed browser languages and blocked storage. Deployment status is recorded in
+`docs/search-visibility.md` after publication is verified.
+
 ## Coupon sharing
 
 `c/` contains the EN/PL/RU public coupon page. It fetches only the public snapshot endpoint, not the private coupons table. QR/barcode rendering uses locally vendored bwip-js 4.11.4; its license is in `c/vendor`. Fonts and their licenses are in `c/fonts`. No analytics or external font requests are added to this page.
