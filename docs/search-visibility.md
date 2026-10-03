@@ -49,6 +49,36 @@ queries and clicks by page over the following weeks before adding more topics.
 
 No Search Console write, new analytics, DNS or hosting change was performed.
 
+### Polish language suggestion — published 2026-10-03
+
+The user chose a non-forced suggestion rather than automatic language redirects.
+The English homepage shows `Czytasz po polsku?` when Polish is the browser's
+first supported EN/PL language and there is no saved manual choice. The Polish
+CTA opens `/pl/`; `Stay in English` dismisses the prompt. Both homepage language
+switches and the English guide's Polish-homepage links remember explicit
+choices in `expiry.site-language.v1` localStorage. This suppresses repeat
+prompts but never overrides a requested URL. Browser language is not proof of
+the visitor's country. No IP lookup, cookies, analytics or redirect is added.
+
+Static EN/PL links and indexable HTML still work without JavaScript. Blocked
+storage does not prevent choosing a language; persistence is limited to the
+current visit in that case. Coupon, auth and legal routes are unchanged.
+Canonicals, reciprocal homepage hreflang and the five-entry sitemap remain
+unchanged; the English-only guide is not presented as a Polish translation.
+
+All 14 dependency-free language tests and existing SEO tests pass. Controlled
+Chrome checks cover 320/375/768/1024/1440 widths, keyboard dismissal and focus,
+EN/PL and guide navigation, reload persistence, mixed browser languages and
+blocked storage. The local test server injects language overrides only on its
+loopback origin; production has no QA language overrides. A pre-existing
+min-content overflow in the homepage's steps grid was also fixed at 320px.
+
+Implementation commit `5bf9047` was pushed to `main`; GitHub Pages run
+`37148955873` completed successfully. Public homepage, Polish page, guide,
+shared stylesheet and language script return HTTP 200 and match this checkout.
+Chrome confirms the published EN/PL controls and language script. This verifies
+publication, not Google indexing or improved search positions.
+
 ## Verified live
 
 - Homepage returns HTTP 200, has static indexable HTML and a canonical URL.
