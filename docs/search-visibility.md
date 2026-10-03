@@ -1,5 +1,50 @@
 # Search visibility and landing update — 2026-09-30
 
+## Update — 2026-10-03
+
+This supersedes the older deployment/ownership prerequisites below, which are
+retained as historical evidence.
+
+### Verified before the new local work
+
+- In Chrome, Search Console's URL-prefix property shows the homepage indexed,
+  successful fetch/indexing, and matching user/Google canonical.
+- Domain property `getexpiry.me` was added by the user on 2026-10-03. Its
+  settings explicitly say the user is a verified owner. Its reports still
+  show data processing; this is not evidence of an indexing failure.
+- Google's verification TXT is visible on both authoritative Spaceship
+  nameservers and public Google/Cloudflare resolvers. Keep it in DNS.
+- Domain property Sitemap report contains `https://getexpiry.me/sitemap.xml`,
+  status Successful, three discovered pages, last processed 2026-10-03.
+
+### New first-stage pages — local, not deployed
+
+The user approved starting with a Polish homepage and an English screenshot
+guide. Implemented `/pl/` and `/save-coupons-from-screenshots/`, plus discoverable
+links from both homepages, reciprocal EN/PL/x-default annotations for homepages,
+unique metadata, guide BreadcrumbList, and two additional sitemap URLs.
+
+The English-only guide links to the Polish homepage explicitly; it does not
+pretend the homepage is its translation. The tutorial is based on current
+published 1.0.4 workflows and existing English UI labels, not unreleased 1.0.5
+feature claims. The actual coupon-list screenshot contains no redeemable code.
+Recognition and retailer acceptance caveats are visible. No real coupon token
+pages, auth routes or private data are added to the sitemap or structured data.
+
+Dependency-free checks: `node tests/seo.test.cjs`. Chrome layout checks passed
+for all three product pages at 320/375/768/812/1024/1440 widths with no horizontal
+overflow and loaded images. FAQ expansion, guide anchors and language/site links
+are verified separately. No automatic ranking improvement is promised.
+
+After an authorized push/deployment, verify the two public routes, five-entry
+sitemap, reciprocal alternates and indexed canonicals in Search Console. Its
+existing sitemap URL is unchanged; no new property or DNS change is necessary.
+Request indexing only after the new pages are live. Evaluate impressions,
+queries and clicks by page over the following weeks before adding more topics.
+
+No publish, commit, push, Search Console write, new analytics or hosting change
+has been performed by this local implementation.
+
 ## Verified live
 
 - Homepage returns HTTP 200, has static indexable HTML and a canonical URL.
