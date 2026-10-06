@@ -102,7 +102,8 @@ check('Prompt is progressive enhancement; real links and excluded routes are pre
   assert.ok(polish.includes('data-site-language="en"') && polish.includes('data-site-language="pl"'));
   const guide = fs.readFileSync(path.join(__dirname, '../save-coupons-from-screenshots/index.html'), 'utf8');
   assert.ok(guide.includes('data-site-language="pl"') && guide.includes('site-language.js'));
-  assert.ok(!guide.includes('data-language-prompt'), 'an English-only guide is not offered as a translated page');
+  assert.ok(!guide.includes('data-language-prompt'), 'guides use explicit same-topic language links, not forced prompts');
+  assert.ok(guide.includes('href="/pl/jak-zapisac-kupon-ze-zrzutu-ekranu/" lang="pl" hreflang="pl" data-site-language="pl"'));
   for (const route of ['c', 'privacy', 'terms', 'auth/confirmed']) {
     assert.ok(!fs.readFileSync(path.join(__dirname, '..', route, 'index.html'), 'utf8').includes('site-language.js'), route);
   }

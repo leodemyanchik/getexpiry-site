@@ -9,7 +9,7 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8766';
   assert.ok(html.includes('rel="canonical" href="https://getexpiry.me/"'));
   assert.ok(!html.includes('noindex'));
   const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 5);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, require('./seo-pages.cjs').length + 2);
   assert.ok(!sitemap.includes('/c/') && !sitemap.includes('/auth/'));
   assert.ok(fs.readFileSync(path.join(root, 'c/index.html'), 'utf8').includes('noindex'));
   const browser = await chromium.launch({headless: true, channel: 'chrome'});

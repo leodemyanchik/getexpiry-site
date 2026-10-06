@@ -1,5 +1,60 @@
 # Search visibility and landing update — 2026-09-30
 
+## Update — 2026-10-05 — prepared locally, not published
+
+The user asked to continue the agreed SEO steps. Added five static pages:
+
+- Polish screenshot guide: `/pl/jak-zapisac-kupon-ze-zrzutu-ekranu/`.
+- Reminder guides: `/coupon-expiry-reminders/` and
+  `/pl/przypomnienia-o-waznosci-kuponow/`.
+- Wallet guides: `/organize-coupons-vouchers-cards/` and
+  `/pl/kupony-bony-karty-w-jednym-miejscu/`.
+
+The existing English screenshot guide is updated for released 1.0.5: currency
+selection/defaults, clearer custom reminder steps, and session-refresh guidance
+without instructing the user to open the main app before every import.
+Apple's live Lookup API returned 1.0.5 / com.expiry.expiry in GB and PL during
+this task. UI labels and reminder eligibility were checked against the app:
+the details screen exposes Reminders only with an expiry or start date. The
+gift-card guide therefore requires a real expiry date, not an invented deadline.
+
+All four EN/PL page pairs (home plus three guide topics) have reciprocal
+en/pl/x-default links and self-canonicals. Language switches stay on the same
+guide topic. Both homepages link to all three guides in their own language;
+each guide links to the other two. Titles and descriptions are unique,
+breadcrumbs match the localized page, and sitemap now lists ten URLs.
+
+English app screenshots are deliberately labelled English on Polish pages;
+no Polish screenshot was fabricated. Reminder diagrams are marked illustrative,
+not screenshots. No guaranteed notifications, live gift-card balances, Apple
+Wallet integration, new deal discovery or universal retailer acceptance claims.
+Existing private coupon/auth routes, legal copy, language suggestion, hosting,
+DNS and tracking behavior are unchanged.
+
+Verification:
+
+- `node tests/seo.test.cjs`: eight product pages, four reciprocal pairs,
+  ten sitemap URLs, unique metadata, valid JSON-LD, anchors, local assets and
+  internal links; private routes remain excluded.
+- `node tests/site-language.test.cjs`: all 14 checks pass.
+- In-app browser: all eight pages at 320/375/768/1024/1440 widths
+  (40 layouts), no horizontal overflow, one h1 and loaded images.
+- EN/PL same-guide navigation, FAQ expansion and related reminder navigation
+  checked interactively. Desktop reminder and mobile Polish screenshot layouts
+  visually inspected; temporary viewport override reset.
+- Proof images are in the app checkout's ignored
+  `D:/LeoWork/expiry/build/seo-2026-10-05/`.
+
+Chrome Search Console opened the existing URL-prefix property's overview.
+It displayed indexing-report data processing and insufficient Core Web Vitals
+data. The connection was lost before any individual URL inspection result was
+verified. Do not interpret this as an indexing failure. No request indexing,
+sitemap resubmission, account/DNS change or external outreach performed.
+
+These pages are local only: no commit, push or deployment in this task.
+After publication, confirm live HTTP/canonical/content and then inspect the
+new URLs in Search Console. See `docs/seo-next-steps-2026-10-05.md`.
+
 ## Update — 2026-10-03
 
 This supersedes the older deployment/ownership prerequisites below, which are
