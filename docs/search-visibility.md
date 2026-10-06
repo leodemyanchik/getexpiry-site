@@ -1,5 +1,24 @@
 # Search visibility and landing update — 2026-09-30
 
+## Update — 2026-10-06 — published and verified
+
+The user explicitly authorized publication. Website commit
+`532df400c3fb1bdb1b4ad2cc005a1f358a8e4594` was pushed to `main`;
+[GitHub Pages run 37496054145](https://github.com/leodemyanchik/getexpiry-site/actions/runs/37496054145)
+completed successfully for that exact commit.
+
+The five new routes listed in the October 5 entry below are now public.
+Fresh HTTP checks verified all eight product pages, both CSS files, the language
+script, sitemap, robots and screenshot: fourteen URLs return HTTP 200 and match
+the checkout (text normalized only for CRLF; screenshot bytes match exactly).
+This verifies deployed titles, canonical/language annotations, internal links
+and the ten-entry sitemap, not Google indexing or ranking. Static SEO checks
+and all fourteen language tests were rerun successfully before publication.
+
+Only the website was committed/pushed. No app release, backend, DNS, hosting,
+Search Console submission or external outreach changed. Search Console URL
+inspection remains the next step; the October 5 local-only status is historical.
+
 ## Update — 2026-10-05 — prepared locally, not published
 
 The user asked to continue the agreed SEO steps. Added five static pages:

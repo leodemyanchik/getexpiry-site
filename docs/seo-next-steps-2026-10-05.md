@@ -4,15 +4,19 @@
 
 Steps 1–3 are prepared locally: Polish screenshot guide, EN/PL reminder and
 wallet guides, updated English import instructions for 1.0.5, localized internal
-links, reciprocal language annotations, and sitemap. No publication yet.
+links, reciprocal language annotations, and sitemap.
+Published on October 6 after explicit user approval: commit `532df40`,
+GitHub Pages run `37496054145` successful. All eight product pages and six
+assets/SEO files return HTTP 200 and match the checkout. This supersedes the
+original local-only status; Google indexing remains unverified.
 The UI/UX skill informed readable hierarchy, touch targets and responsive checks;
 the site's existing purple palette, fonts and assets remain the visual baseline.
 
 ## Step 4 — publication and Search Console
 
-1. Confirm the website diff and authorize publication to GitHub Pages.
-2. Commit/push only website changes; do not include unrelated app changes.
-3. Verify the Pages deployment succeeded and all new routes return HTTP 200.
+1. Completed October 6: confirmed the website diff and publication approval.
+2. Completed October 6: committed/pushed website changes only, no app changes.
+3. Completed October 6: Pages deployment succeeded; all new routes return HTTP 200.
    Confirm live page content, self-canonical, language alternates and sitemap.
 4. With Chrome connected, inspect the Polish homepage and the existing English
    screenshot guide, then the five newly published URLs. Record indexed status,
