@@ -1,4 +1,5 @@
 import { toSVG } from './vendor/bwip-js.mjs';
+import { barcodeOptions } from './code-formats.js';
 const words = {
  en: {eyebrow:'A little saving, shared.',title:'A coupon for you.',loading:'Loading coupon…',error:'This link is unavailable, disabled or has expired.',network:'Could not load the coupon. Check your connection and try again.',retry:'Try again',checkout:'Show at checkout',warning:'Single-use coupons can only be redeemed once. Check the store’s terms; some coupons require the original.',keep:'Keep it. Don’t forget it.',benefit:'Save your coupons in Expiry and get an expiry reminder.',open:'Open in Expiry',download:'Get Expiry for iPhone ↗',after:'Just installed? Return to this message and open the link again.',privacy:'Anyone with this link can view this copy. The sender can disable the link. Saved copies cannot be recalled.',close:'Close',until:'Valid until',minimum:'Minimum spend',expired:'Expired'},
  pl: {eyebrow:'Mała oszczędność. Podaj dalej.',title:'Kupon dla Ciebie.',loading:'Wczytywanie kuponu…',error:'Ten link jest niedostępny, wyłączony lub wygasł.',network:'Nie udało się wczytać kuponu. Sprawdź połączenie i spróbuj ponownie.',retry:'Spróbuj ponownie',checkout:'Pokaż przy kasie',warning:'Kupon jednorazowy można wykorzystać tylko raz. Sprawdź warunki sklepu; czasem wymagany jest oryginał.',keep:'Zachowaj. Nie zapomnij.',benefit:'Zapisuj kupony w Expiry i otrzymuj przypomnienia o terminie ważności.',open:'Otwórz w Expiry',download:'Pobierz Expiry na iPhone’a ↗',after:'Po instalacji wróć do wiadomości i ponownie otwórz link.',privacy:'Każdy, kto ma link, może zobaczyć tę kopię. Nadawca może wyłączyć link. Zapisanych kopii nie można cofnąć.',close:'Zamknij',until:'Ważny do',minimum:'Minimalny zakup',expired:'Wygasły'},
@@ -46,7 +47,7 @@ function render() {
   if (coupon.code_value && ['barcode','qr'].includes(coupon.code_type)) {
     try {
       // Locally bundled encoder; the coupon code is never sent to a QR service.
-      const svg = toSVG({bcid:coupon.code_type === 'qr' ? 'qrcode' : 'code128',text:coupon.code_value,scale:3,height:16,padding:12});
+      const svg = toSVG(barcodeOptions(coupon));
       const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
       $('code').append(document.importNode(doc.documentElement, true));
     } catch { /* Keep the exact readable code if this symbology cannot encode it. */ }
