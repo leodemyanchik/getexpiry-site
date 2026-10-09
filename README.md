@@ -14,7 +14,7 @@ Light editorial direction: warm off-white, dark ink, Expiry purple, Outfit headi
 - All download links use App Store ID 6780260457; no TestFlight CTA.
 - Coupon visuals are labeled CSS illustrations, not actual app screenshots or user records.
 - Legal pages and auth handoff use `assets/pages.css`, sharing the landing's palette and typography. Legal text and auth callback script remain unchanged.
-- No analytics scripts, cookies or new tracking added. External Google Fonts was already used by the website.
+- The September redesign added no analytics. Public pages now have consent-gated GA4 (October 2026); coupon-sharing/auth routes remain excluded. External Google Fonts was already used by the website. See `docs/website-analytics.md`.
 - The published homepage was originally English; a Polish homepage is now
   available at `/pl/` (see the first SEO expansion below). App language
   support does not imply that all website routes are translated.
