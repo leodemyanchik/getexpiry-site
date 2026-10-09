@@ -54,5 +54,12 @@ Do not put email addresses, user IDs, coupon codes or private data in campaign l
 - Browser checks: mobile EN/PL accept/refuse, settings and focus restoration;
   local preview has no Google script. Responsive styles preserve keyboard focus
   and equivalent accept/reject buttons (UI/UX Pro Max guidance).
-- Publish status and live collection must be verified separately; local tests
-  do not establish deployment or successful delivery to Google.
+- Published code commit: `4a390a0f98cad690674e51ff2aa2fe86394abe8b`.
+  GitHub Pages run `37941622014` completed successfully. All ten public HTML
+  pages and both analytics assets returned HTTP 200 and matched the committed
+  content. Coupon sharing and `/auth/confirmed/` remain free of analytics.
+- Live Chrome: no Google script before consent, loader present after consent.
+  GA4 real-time confirmed EN and PL page views and `app_store_click` delivery
+  (two test clicks). These are QA events, not organic traffic or installations.
+  Source/medium attribution in standard reports has not yet been verified.
+- Unrelated local homepage/Cards/SEO changes were preserved and not deployed.
