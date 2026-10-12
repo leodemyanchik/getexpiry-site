@@ -8,7 +8,10 @@ links, reciprocal language annotations, and sitemap.
 Published on October 6 after explicit user approval: commit `532df40`,
 GitHub Pages run `37496054145` successful. All eight product pages and six
 assets/SEO files return HTTP 200 and match the checkout. This supersedes the
-original local-only status; Google indexing remains unverified.
+original local-only status. October 6 Search Console follow-up: English home
+indexed; seven other product URLs not yet indexed, all indexing requests
+accepted; the existing sitemap resubmitted successfully with ten discovered
+pages. See `seo-search-console-2026-10-06.md` for URL-by-URL evidence.
 The UI/UX skill informed readable hierarchy, touch targets and responsive checks;
 the site's existing purple palette, fonts and assets remain the visual baseline.
 
@@ -18,12 +21,13 @@ the site's existing purple palette, fonts and assets remain the visual baseline.
 2. Completed October 6: committed/pushed website changes only, no app changes.
 3. Completed October 6: Pages deployment succeeded; all new routes return HTTP 200.
    Confirm live page content, self-canonical, language alternates and sitemap.
-4. With Chrome connected, inspect the Polish homepage and the existing English
-   screenshot guide, then the five newly published URLs. Record indexed status,
-   selected canonical and any actual exclusion reason.
-5. Request indexing for eligible new/updated pages if needed. Do not request
-   indexing for coupon-token or auth routes. Keep the existing sitemap URL;
-   a domain-property or DNS change is not needed.
+4. Completed October 6: inspected both homepages and all six guide URLs.
+   English home is indexed with correct canonical. The other seven URLs
+   were unknown to Google and unindexed, with no crawl or chosen canonical.
+5. Completed October 6: all seven indexing requests accepted. Resubmitted
+   the existing sitemap URL; Successful, processed October 6, ten discovered
+   pages. No coupon-token/auth request, property or DNS change. Indexing of
+   those seven pages remains pending, not confirmed by submission.
 6. Compare Search Console impressions, queries and clicks by page/language over
    the following weeks. Candidate article topics are not validated search-volume
    estimates; judge them using real query data instead of daily title rewrites.

@@ -17,24 +17,25 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8766';
     const page = await browser.newPage({reducedMotion: 'reduce'});
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
-    for (const width of [320, 375, 768, 812, 1024, 1440]) {
+    for (const route of ['/', '/pl/']) for (const width of [320, 375, 768, 812, 1024, 1440]) {
       await page.setViewportSize({width, height: width === 812 ? 375 : 812});
-      await page.goto(base);
+      await page.goto(base + route);
       await page.evaluate(() => document.fonts.ready);
       assert.equal(await page.locator('h1').count(), 1);
       assert.equal(await page.locator('.wallet-types article').count(), 6);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow at ${width}`);
-      const faq = page.locator('details').filter({hasText: 'Does someone need Expiry'});
+      assert.equal(await page.locator('#cards .release-label').count(), 1);
+      assert.equal(await page.locator('#cards .cards-benefits h3').count(), 2);
+      const faq = page.locator('details').filter({hasText: route === '/' ? 'Where will I find my loyalty cards?' : 'Gdzie znajdę swoje karty lojalnościowe?'});
       await faq.locator('summary').click();
       assert.ok(await faq.getAttribute('open') !== null);
-      if (width === 1440 && process.env.PREVIEW_PATH) {
-        await page.locator('#wallet').screenshot({path: process.env.PREVIEW_PATH});
-        await page.locator('#sharing').screenshot({path: process.env.PREVIEW_PATH.replace(/\.png$/, '-sharing.png')});
+      if ([375,1440].includes(width) && process.env.PREVIEW_PATH) {
+        await page.locator('#cards').screenshot({path: process.env.PREVIEW_PATH.replace(/\.png$/, `-${route === '/' ? 'en' : 'pl'}-${width}.png`)});
       }
     }
     assert.deepEqual(errors, []);
     assert.equal((await page.request.get(`${base}/robots.txt`)).status(), 200);
     assert.equal((await page.request.get(`${base}/sitemap.xml`)).status(), 200);
-    console.log('Landing checks passed: six sizes, six item types, sharing FAQ, SEO files.');
+    console.log('Landing checks passed: EN/PL at six sizes, upcoming cards section and FAQ, six item types, SEO files.');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

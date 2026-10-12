@@ -1,5 +1,21 @@
 # Search visibility and landing update — 2026-09-30
 
+## Update — 2026-10-06 — Search Console requests confirmed
+
+In Chrome, inspected both homepages and all six guides in Domain property
+`getexpiry.me`. English home is indexed; user canonical is the HTTPS root
+and Google canonical is the inspected URL. The other seven URLs were unknown
+to Google and not indexed, with no crawl or chosen canonical in indexed data.
+All seven indexing requests were accepted into the priority crawl queue.
+This is not yet indexing or a ranking gain.
+
+The existing sitemap initially showed only three discovered URLs and an
+October 3 processing date. Resubmitted the same sitemap URL and confirmed
+Successful, processed October 6, **ten discovered pages**. No private coupon
+or auth URLs requested, DNS/property changes, code deployment or outreach.
+See `docs/seo-search-console-2026-10-06.md` for exact routes and screenshots.
+These audit updates are local; no additional commit/push performed for them.
+
 ## Update — 2026-10-06 — published and verified
 
 The user explicitly authorized publication. Website commit
