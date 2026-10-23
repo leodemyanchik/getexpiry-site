@@ -26,9 +26,15 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8766';
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow at ${width}`);
       assert.equal(await page.locator('#cards .release-label').count(), 1);
       assert.equal(await page.locator('#cards .cards-benefits h3').count(), 2);
-      const faq = page.locator('details').filter({hasText: route === '/' ? 'Where will I find my loyalty cards?' : 'Gdzie znajdę swoje karty lojalnościowe?'});
+      assert.equal(await page.locator('#cards .release-label').textContent(), route === '/' ? 'AVAILABLE NOW' : 'JUŻ DOSTĘPNE');
+      const faq = page.locator('details').filter({hasText: route === '/' ? 'Where do I find my loyalty cards?' : 'Gdzie znajdę swoje karty lojalnościowe?'});
       await faq.locator('summary').click();
       assert.ok(await faq.getAttribute('open') !== null);
+      for (const href of await page.locator('a[href*="apps.apple.com"]').evaluateAll(links => links.map(link => link.href))) {
+        const destination = new URL(href);
+        assert.equal(destination.origin + destination.pathname, 'https://apps.apple.com/app/id6780260457');
+        assert.ok(!destination.search || destination.search === '?l=pl');
+      }
       if ([375,1440].includes(width) && process.env.PREVIEW_PATH) {
         await page.locator('#cards').screenshot({path: process.env.PREVIEW_PATH.replace(/\.png$/, `-${route === '/' ? 'en' : 'pl'}-${width}.png`)});
       }
@@ -36,6 +42,6 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8766';
     assert.deepEqual(errors, []);
     assert.equal((await page.request.get(`${base}/robots.txt`)).status(), 200);
     assert.equal((await page.request.get(`${base}/sitemap.xml`)).status(), 200);
-    console.log('Landing checks passed: EN/PL at six sizes, upcoming cards section and FAQ, six item types, SEO files.');
+    console.log('Landing checks passed: EN/PL at six sizes, released Cards section and FAQ, App Store links, six item types, SEO files.');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

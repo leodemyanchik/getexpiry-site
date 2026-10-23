@@ -70,7 +70,8 @@ for (const page of pages.slice(0, 2)) {
   assert.equal((read(page.file).match(/<article><h3>/g) || []).length, 6, `six wallet types: ${page.route}`);
   const home = read(page.file);
   assert.ok(home.includes('id="cards" aria-labelledby="cards-title"'), `dedicated cards section: ${page.route}`);
-  assert.ok(home.includes(page.lang === 'en' ? 'COMING IN THE NEXT APP UPDATE' : 'W NASTĘPNEJ AKTUALIZACJI APLIKACJI'), `not advertised as released: ${page.route}`);
+  assert.ok(home.includes(page.lang === 'en' ? 'AVAILABLE NOW' : 'JUŻ DOSTĘPNE'), `released Cards feature: ${page.route}`);
+  assert.ok(!/upcoming update|next app update|następnej aktualizacji/i.test(home), `no stale Cards release promise: ${page.route}`);
   assert.ok(home.includes(page.lang === 'en' ? 'Cards at hand.' : 'Karty pod ręką.'), `two-purpose positioning: ${page.route}`);
 }
 
